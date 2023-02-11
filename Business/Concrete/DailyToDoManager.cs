@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Aspect.Autofac;
 using Business.Constancts;
 using Core.Utilities.Result;
 using DataAccess.Abstract;

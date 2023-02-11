@@ -26,7 +26,7 @@ namespace Business.Concrete
         }
         [SecuredOperation("todo.add,admin")]
         [ValidationAspect(typeof(ToDoValidator))]
-        public async Task<IResult> Add(ToDo toDo)
+        public  IResult Add(ToDo toDo)
         {
             IResult result = BusinessRules.Run(CheckIfToDoNameExist(toDo.TaskName), CheckUserHaveToDo(toDo.UserId), ControlMaxUser());
 
@@ -35,7 +35,7 @@ namespace Business.Concrete
                 return result;
             }
             _toDoDal.Add(toDo);
-            await _toDoDal.AddDailyToDo(toDo);
+             _toDoDal.AddDailyToDo(toDo);
             return new SuccessResult(Messages.ToDoAdd);
         }
         public IResult Delete(ToDo toDo)

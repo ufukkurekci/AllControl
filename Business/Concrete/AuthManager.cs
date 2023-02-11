@@ -21,11 +21,11 @@ namespace Business.Concrete
             _UserService = userService;
             _tokenHelper = tokenHelper;
         }
-        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto)
+        public IDataResult<User> Register(UserForRegisterDto userForRegisterDto , string password)
         {
             byte[] passwordHash;
             byte[] passwordSalt;
-            HashingHelper.CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
 
             var user = new User
@@ -58,9 +58,9 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<User>(userToCheck.Data, "Success login");
         }
-        public IResult UserExists(string emailJwt)
+        public IResult UserExists(string email)
         {
-            if (_UserService.GetByMail(emailJwt).Data != null)
+            if (_UserService.GetByMail(email).Data != null)
             {
                 return new ErrorResult("User already exist.");
             }

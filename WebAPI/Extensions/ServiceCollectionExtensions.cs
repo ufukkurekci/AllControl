@@ -1,4 +1,5 @@
-﻿using Core.Utilities.IoC;
+﻿using Core.DependencyResolver;
+using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DependencyResolver
+namespace Core.Extensions
 {
-    public class CoreModule : ICoreModule
+    public static class ServiceCollectionExtensions
     {
-        public void Load(IServiceCollection serviceCollection)
+        public static IServiceCollection Load(this IServiceCollection serviceCollection)
         {
-           // serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+            ServiceTool.Create(serviceCollection);
+            return serviceCollection;
         }
     }
 }

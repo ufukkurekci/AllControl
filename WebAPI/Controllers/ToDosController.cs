@@ -2,6 +2,7 @@
 using Core.Entites;
 using Core.Extensions;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,12 +41,10 @@ namespace WebAPI.Controllers
             }
             return BadRequest(r);
         }
-
         [HttpPost("Addtodo")]
-        public async Task<IActionResult> Post(ToDo toDo)
+        public  IActionResult Post(ToDo toDo)
         {
-            var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
-            var r = await _todoService.Add(toDo);
+            var r =  _todoService.Add(toDo);
             if (r.IsSuccess)
             {
                 return Ok(r);

@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IToDoDal : IEntityRepository<ToDo>
     {
-        Task AddDailyToDo(ToDo toDo);
+        void AddDailyToDo(ToDo toDo);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Aspect.Autofac;
 using Business.Constancts;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -20,7 +21,7 @@ namespace Business.Concrete
         {
             _userRoleDal = userRoleDal;
         }
-
+        [SecuredOperation("admin")]
         public IResult Add(UserRole userRole)
         {
             _userRoleDal.Add(userRole);

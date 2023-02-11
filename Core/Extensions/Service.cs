@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DependencyResolver
+namespace Core.Extensions
 {
-    public class CoreModule : ICoreModule
+    public static class CollectionExtensions
     {
-        public void Load(IServiceCollection serviceCollection)
+        public static IServiceCollection LoadMyServices(this IServiceCollection serviceCollection)
         {
-           // serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+            ServiceTool.Create(serviceCollection);
+            return serviceCollection;
         }
     }
 }

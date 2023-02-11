@@ -20,7 +20,7 @@ namespace DataAccess.Concrete
             _allControlContext = allControlContext;
         }
 
-        public async Task AddDailyToDo(ToDo toDo)
+        public void AddDailyToDo(ToDo toDo)
         {
             var bulkdata = new List<DailyToDo>();
 
@@ -36,9 +36,9 @@ namespace DataAccess.Concrete
                 bulkdata.Add(item);
             }
 
-            using (var tran = await _allControlContext.Database.BeginTransactionAsync())
+            using (var tran = _allControlContext.Database.BeginTransaction())
             {
-                await _allControlContext.BulkInsertAsync(bulkdata);
+                _allControlContext.BulkInsert(bulkdata);
                 tran.Commit();
             }
         }

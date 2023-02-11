@@ -12,7 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<ToDo>> GetAllToDo();
         IDataResult<ToDo> GetById(int id);
-        Task<IResult> Add(ToDo toDo);
+        IResult Add(ToDo toDo);
         IResult Update(ToDo toDo);
         IResult Delete(ToDo toDo);
 
